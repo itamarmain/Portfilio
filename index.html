@@ -1,200 +1,635 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Itamar • Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Itamar — AI & Backend Developer</title>
+  <meta name="description" content="Itamar — AI systems, Discord bots, full-stack automation. Zeke, Coretex, Coretex AI Studio." />
+  <meta name="theme-color" content="#0b0b10" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", sans-serif;
-      scroll-behavior: smooth;
+    /* --------------------------
+       Base / Reset
+       -------------------------- */
+    :root{
+      --bg:#07070a;
+      --card:#0f1115;
+      --muted:#9aa3bd;
+      --accent-1:#5b8bff;
+      --accent-2:#9b4dff;
+      --glass: rgba(255,255,255,0.04);
+      --neon: 0 6px 28px rgba(99,84,255,0.12), 0 1px 0 rgba(255,255,255,0.02) inset;
+      --radius:14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(79,140,255,0.04), transparent 6%),
+                  radial-gradient(900px 400px at 90% 90%, rgba(155,77,255,0.03), transparent 6%),
+                  var(--bg);
+      color:#e7eefc;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+      padding-bottom:120px;
     }
 
-    body {
-      background: #0f0f0f;
+    /* --------------------------
+       Navbar
+       -------------------------- */
+    .nav {
+      position:sticky;
+      top:12px;
+      z-index:60;
+      display:flex;
+      justify-content:center;
+      pointer-events:auto;
+    }
+    .nav-inner{
+      width:min(1100px,94%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:999px;
+      padding:10px 18px;
+      display:flex;
+      align-items:center;
+      gap:18px;
+      justify-content:space-between;
+      box-shadow: var(--neon);
+      backdrop-filter: blur(8px) saturate(120%);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
       color: #fff;
-      line-height: 1.6;
+    }
+    .brand .logo{
+      height:40px; width:40px; border-radius:8px;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700; font-family:var(--mono); color:#081026;
+      box-shadow: 0 6px 20px rgba(83,69,255,0.12);
+    }
+    .brand span{font-weight:600; letter-spacing:0.2px}
+    .nav-links{
+      display:flex; gap:12px; align-items:center;
+    }
+    .nav-links a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:10px;
+      font-size:14px;
+      transition: all .22s ease;
+    }
+    .nav-links a.active, .nav-links a:hover{
+      color:#fff;
+      background: linear-gradient(90deg, rgba(91,139,255,0.12), rgba(155,77,255,0.06));
+      transform:translateY(-2px);
+      box-shadow: 0 10px 30px rgba(79,140,255,0.06);
     }
 
-    header {
-      padding: 80px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #0e0e0e, #1f1f1f);
+    /* --------------------------
+       Hero
+       -------------------------- */
+    .hero{
+      width:min(1100px,94%);
+      margin:48px auto 22px;
+      padding:36px;
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 12px 50px rgba(0,0,0,0.6);
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:center;
+      overflow:hidden;
+    }
+    @media(max-width:880px){ .hero{grid-template-columns:1fr; padding:28px;} }
+
+    .hero-left h1{
+      margin:0 0 8px;
+      font-size: clamp(28px, 4.2vw, 44px);
+      line-height:1.02;
+      background: linear-gradient(92deg, var(--accent-1), var(--accent-2));
+      -webkit-background-clip:text;
+      color:transparent;
+      text-shadow: 0 6px 20px rgba(91,139,255,0.06);
+    }
+    .tagline{
+      color:var(--muted);
+      margin-bottom:18px;
+      font-size:15px;
+    }
+    .hero-cta{
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:10px; font-weight:600; font-size:14px;
+      cursor:pointer; text-decoration:none; border:1px solid rgba(255,255,255,0.03);
+      transition:transform .22s ease, box-shadow .22s ease;
+      background: linear-gradient(90deg, rgba(91,139,255,0.10), rgba(155,77,255,0.04));
+      color:#fff;
+    }
+    .btn:hover{ transform:translateY(-4px); box-shadow: 0 18px 40px rgba(79,140,255,0.08); }
+
+    .hero-right{
+      display:flex; flex-direction:column; gap:14px; align-items:center;
+      justify-content:center;
+    }
+    .stats{
+      display:flex; gap:10px; width:100%; justify-content:space-between;
+    }
+    .stat{
+      background:var(--card);
+      padding:12px 14px;
+      border-radius:12px;
+      text-align:center;
+      width:48%;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .stat h4{margin:0; font-size:18px}
+    .stat p{margin:4px 0 0; color:var(--muted); font-size:13px}
+
+    /* --------------------------
+       Main content container
+       -------------------------- */
+    .container{
+      width:min(1100px,94%);
+      margin:36px auto;
+      display:grid;
+      grid-template-columns: 1fr 340px;
+      gap:28px;
+    }
+    @media(max-width:1100px){ .container{grid-template-columns:1fr} }
+
+    /* --------------------------
+       Projects list (left column)
+       -------------------------- */
+    .projects-col{ display:flex; flex-direction:column; gap:20px; }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
+      border-radius: var(--radius);
+      padding:20px;
+      border:1px solid rgba(255,255,255,0.03);
+      transform-origin:center;
+      transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+      box-shadow: 0 6px 22px rgba(8,10,20,0.6);
+      overflow:hidden;
+    }
+    .card:hover{ transform: translateY(-8px) rotateX(1.2deg); box-shadow: 0 30px 80px rgba(79,140,255,0.06); }
+
+    .card h3{ margin:0 0 8px; color:#fff; }
+    .card .muted{ color:var(--muted); font-size:14px; margin-bottom:12px; }
+
+    .project-meta{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
+    }
+    .badge{
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.02);
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s forwards ease-out;
+    /* fancy description list */
+    .project-grid{
+      display:grid;
+      grid-template-columns: 1fr 180px;
+      gap:16px;
+      margin-top:12px;
+    }
+    @media(max-width:880px){ .project-grid{grid-template-columns:1fr} }
+
+    .project-keys{ color:var(--muted); font-size:14px; line-height:1.5; }
+    .project-details{ font-size:14px; color:#dfe9ff; line-height:1.5; }
+
+    /* tech list */
+    .techs{ display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+    .tech{
+      padding:6px 10px; border-radius:8px; font-size:13px; color:var(--muted);
+      border:1px solid rgba(255,255,255,0.03); background:rgba(255,255,255,0.01);
     }
 
-    header p {
-      font-size: 1.2rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1.3s forwards ease-out;
+    /* --------------------------
+       Right column (aside)
+       -------------------------- */
+    .aside{
+      position:relative;
+      display:flex; flex-direction:column; gap:18px;
+      align-self:start;
     }
 
-    nav {
-      margin-top: 20px;
+    .panel{
+      padding:18px;
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      border:1px solid rgba(255,255,255,0.03);
     }
 
-    nav a {
-      color: #aaa;
-      margin: 0 10px;
-      text-decoration: none;
-      transition: color 0.3s;
+    .skills .skill{
+      display:flex; flex-direction:column; gap:8px; margin-bottom:12px;
+    }
+    .skill .label{ display:flex; justify-content:space-between; color:var(--muted); font-size:13px; }
+    .bar{
+      width:100%; height:10px; background:rgba(255,255,255,0.04); border-radius:8px; overflow:hidden;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .bar > i{ display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); border-radius:8px; transition:width 1s cubic-bezier(.2,.9,.2,1) }
+
+    .timeline{ display:flex; flex-direction:column; gap:12px; }
+    .time-item{ display:flex; gap:12px; align-items:flex-start; }
+    .time-dot{ width:12px; height:12px; border-radius:50%; background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); box-shadow:0 6px 20px rgba(83,69,255,0.12) }
+    .time-body{ color:var(--muted); font-size:14px; }
+
+    /* --------------------------
+       Footer
+       -------------------------- */
+    footer{
+      width:100%;
+      margin-top:30px;
+      display:flex; justify-content:center;
+      color:var(--muted); font-size:13px; opacity:0.9;
     }
 
-    nav a:hover {
-      color: #fff;
+    /* --------------------------
+       Scroll reveal helpers
+       -------------------------- */
+    .reveal{ opacity:0; transform: translateY(24px) scale(.995); transition: all .75s cubic-bezier(.2,.9,.2,1); will-change:transform,opacity }
+    .reveal.visible{ opacity:1; transform: translateY(0) scale(1) }
+
+    /* small helpers */
+    h2.section-title{ margin:0 0 10px; color:#fff; font-size:18px; }
+    p.lead{ color:var(--muted); margin:0; font-size:15px; }
+    .muted-note{ color:var(--muted); font-size:13px; margin-top:10px; }
+
+    /* project hover glow overlay (subtle) */
+    .card::after{
+      content:"";
+      position:absolute; pointer-events:none;
+      inset:0; border-radius:var(--radius);
+      background: linear-gradient(120deg, rgba(91,139,255,0.02), rgba(155,77,255,0.01));
+      mix-blend-mode:overlay; opacity:0; transition:opacity .4s;
     }
+    .card:hover::after{ opacity:1; }
 
-    section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 20px;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeSection 1s forwards ease-out;
-    }
-
-    section:nth-of-type(1) { animation-delay: 0.2s; }
-    section:nth-of-type(2) { animation-delay: 0.4s; }
-    section:nth-of-type(3) { animation-delay: 0.6s; }
-    section:nth-of-type(4) { animation-delay: 0.8s; }
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      border-left: 4px solid #4f8cff;
-      padding-left: 12px;
-    }
-
-    .project {
-      margin-bottom: 35px;
-      padding: 20px;
-      background: #1a1a1a;
-      border-radius: 10px;
-      transition: transform 0.3s, background 0.3s;
-    }
-
-    .project:hover {
-      transform: translateY(-5px);
-      background: #222;
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px;
-      color: #777;
-      font-size: 0.9rem;
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeSection {
-      to { opacity: 1; transform: translateY(0); }
+    /* small screens adjustments */
+    @media(max-width:580px){
+      .nav-inner{ padding:8px 12px; gap:8px }
+      .hero-right{ display:none }
+      .hero { padding:18px; grid-template-columns:1fr; }
+      .container{ gap:18px }
     }
   </style>
 </head>
-
 <body>
 
-<header id="home">
-  <h1>Itamar — Developer Portfolio</h1>
-  <p>Backend • AI Systems • Automation • Full-stack Projects</p>
-
-  <nav>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<section id="about">
-  <h2>About Me</h2>
-  <p>
-    I’m Itamar — a developer focused on AI systems, bot automation, backend engineering, 
-    and building real products.  
-    I enjoy creating systems that run fast, scale well, and integrate AI in practical ways.
-  </p>
-</section>
-
-<section id="projects">
-  <h2>Projects</h2>
-
-  <div class="project">
-    <h3>Zeke — Custom Discord Bot</h3>
-    <p>
-      Fully custom Discord bot built in Python, using JSON-based structured configs, 
-      Supabase integration, and real-time features.  
-      Currently serving <strong>600+ happy users</strong>.
-    </p>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#home" aria-label="Itamar home">
+        <div class="logo">IT</div>
+        <span>Itamar</span>
+      </a>
+      <nav class="nav-links" id="navlinks">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
   </div>
 
-  <div class="project">
-    <h3>Coretex — Full AI Discord System</h3>
-    <p>
-      A complete AI-powered Discord bot with:
-      <br>• Dashboard (frontend + backend)  
-      <br>• AI integrations and assistants  
-      <br>• Ticket AI helper  
-      <br>• Full Supabase + database  
-      <br>• Written in Python, JS, and Node  
-    </p>
-  </div>
+  <!-- HERO -->
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-left">
+        <h1>Itamar — AI & Backend Developer</h1>
+        <div class="tagline">I build practical AI systems, automation platforms, and production-grade developer tools — with attention to scale, reliability, and simplicity.</div>
 
-  <div class="project">
-    <h3>Coretex AI Studio</h3>
-    <p>
-      A full AI studio platform with:
-      <br>• Node backend  
-      <br>• AI playground  
-      <br>• Full AI IDE  
-      <br>• Agent team system  
-      <br>• Model fallback (quota reached → next model)  
-      <br>• File creation & editing  
-      <br>• Electron app + Monaco editor  
-    </p>
-  </div>
+        <div class="hero-cta">
+          <a class="btn" href="#projects">Featured Work</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
 
-</section>
+        <div class="muted-note" style="margin-top:14px;">
+          Focus: AI-driven systems • Discord bots • Full-stack automation • Supabase & Python-first engineering
+        </div>
+      </div>
 
-<section id="skills">
-  <h2>Skills</h2>
-  <ul>
-    <li>Python</li>
-    <li>Node.js</li>
-    <li>JavaScript</li>
-    <li>Supabase / Databases</li>
-    <li>AI API integrations</li>
-    <li>Automation systems</li>
-    <li>Frontend static sites</li>
-  </ul>
-</section>
+      <aside class="hero-right" aria-hidden="true">
+        <div class="stats">
+          <div class="stat">
+            <h4>600+</h4>
+            <p>Active users (Zeke)</p>
+          </div>
+          <div class="stat">
+            <h4>Full product</h4>
+            <p>Dashboard • AI • Electron</p>
+          </div>
+        </div>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>
-    Want to reach out?  
-    <br>Email: <strong>your-email@example.com</strong>  
-    <br>Discord: <strong>YourUser#0000</strong>
-  </p>
-</section>
+        <div style="height:8px"></div>
 
-<footer>
-  © 2025 Itamar — All Rights Reserved
-</footer>
+        <div style="font-size:13px;color:var(--muted); text-align:center;">
+          Focused on building real tools that people rely on.
+        </div>
+      </aside>
+    </section>
 
+    <!-- MAIN GRID -->
+    <div class="container">
+
+      <!-- LEFT: Projects -->
+      <div class="projects-col">
+
+        <!-- PROJECT: Zeke -->
+        <article class="card reveal" id="zeke">
+          <h3>Zeke — Community & Moderation Discord Bot</h3>
+          <div class="muted">Custom community features for a game Discord server • Moderation & utilities</div>
+
+          <div class="project-grid" style="margin-top:14px;">
+            <div class="project-details">
+              <p>
+                Zeke is a purpose-built Discord bot created to improve the daily experience of a gaming community.
+                It provides advanced moderation tools, automation for community workflows, and a set of community-first
+                utilities that increase engagement and reduce manual moderation load.
+              </p>
+
+              <div class="project-meta">
+                <span class="badge">Python</span>
+                <span class="badge">Supabase</span>
+                <span class="badge">JSON config</span>
+                <span class="badge">600+ users</span>
+              </div>
+
+              <div style="margin-top:12px; color:var(--muted); font-size:14px;">
+                <strong>Key achievements</strong>
+                <ul style="margin:8px 0 0 18px; color:var(--muted);">
+                  <li>Designed custom community features tailored to a game's server mechanics.</li>
+                  <li>Built moderation flows with automation to reduce manual interventions.</li>
+                  <li>Migrated large local JSON-based configuration to cloud Supabase DB (see technical note).</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="project-keys">
+              <strong style="color:#fff">Technical challenge</strong>
+              <p style="margin-top:8px;">Converting the entire state from local JSON files into a structured cloud database (Supabase), while keeping the bot online and state-consistent. That migration required careful schema design, data transformation, and atomic update patterns.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT: Coretex -->
+        <article class="card reveal" id="coretex">
+          <h3>Coretex — AI Discord Ecosystem & Dashboard</h3>
+          <div class="muted">End-to-end AI bot with dashboard, automation, and AI ticket assistant</div>
+
+          <div class="project-grid" style="margin-top:14px;">
+            <div class="project-details">
+              <p>
+                Coretex is a full AI-enabled Discord ecosystem: a bot integrated with a web dashboard
+                for configuration, analytics, and automations. The system includes an AI-powered ticket assistant,
+                a rich policy-based moderation engine, and customizable automations for server admins.
+              </p>
+
+              <div class="project-meta">
+                <span class="badge">Python</span>
+                <span class="badge">Node.js</span>
+                <span class="badge">Supabase</span>
+                <span class="badge">Dashboard</span>
+              </div>
+
+              <div style="margin-top:12px; color:var(--muted); font-size:14px;">
+                <strong>Highlights</strong>
+                <ul style="margin:8px 0 0 18px; color:var(--muted);">
+                  <li>AI ticket assistant trained over curated FAQs with ephemeral memory (10-minute window) to comply with privacy and Discord TOS.</li>
+                  <li>Dashboard supports auth, analytics, moderation settings, automations, auto responses and logs.</li>
+                  <li>Engineered the integration between Discord OAuth and AI services — maintaining secure auth flows and reliable API routing.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="project-keys">
+              <strong style="color:#fff">Engineering note</strong>
+              <p style="margin-top:8px;">Integrating Discord auth with the dashboard and implementing AI integrations required building a secure token flow, a scalable routing layer for AI APIs, and robust audit logging so admins can trace AI responses and automations.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT: Coretex AI Studio -->
+        <article class="card reveal" id="studio">
+          <h3>Coretex AI Studio — Full AI IDE & Playground</h3>
+          <div class="muted">Monaco-based IDE, agent team pipeline, model-fallback routing, Electron app</div>
+
+          <div class="project-grid" style="margin-top:14px;">
+            <div class="project-details">
+              <p>
+                Coretex AI Studio is a developer-focused AI platform that lets teams plan, generate, and review code and projects.
+                The agent team model follows a multi-step workflow: a Planner creates a step-by-step plan, the Coder generates code
+                based on that plan, and the Reviewer analyzes the output for issues. This separation of concerns makes outputs more reliable.
+              </p>
+
+              <div class="project-meta">
+                <span class="badge">Node.js</span>
+                <span class="badge">Monaco Editor</span>
+                <span class="badge">Electron</span>
+                <span class="badge">Agent Pipelines</span>
+              </div>
+
+              <div style="margin-top:12px; color:var(--muted); font-size:14px;">
+                <strong>Platform features</strong>
+                <ul style="margin:8px 0 0 18px; color:var(--muted);">
+                  <li>Agent team pipeline: Planner → Coder → Reviewer (improves reliability & structure).</li>
+                  <li>Model fallback routing: a researched preset list of open-source models is used; when quota/latency fails, the system switches to the next model automatically.</li>
+                  <li>Full file generation: projects, Python files, multi-language support (generation only — runtime terminal execution not currently supported).</li>
+                  <li>Electron desktop where users can edit and manage projects locally using the same Monaco editor experience.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="project-keys">
+              <strong style="color:#fff">Design decision</strong>
+              <p style="margin-top:8px;">Fallback model selection uses a researched preset ordered by quality/latency tradeoffs — chosen from open-source models that provide the best coverage for offline-friendly or cost-efficient routing.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Closing note -->
+        <div class="card reveal">
+          <h3>Production Mindset</h3>
+          <p class="muted">I focus on shipping complete systems: robust auth, observability, data integrity during migrations, and UX that makes administration easy. I prefer practical, secure engineering over clever but brittle hacks.</p>
+          <div class="muted-note">If you'd like, I can produce code snippets, architecture diagrams, or a migration plan for any of the projects above.</div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Aside (skills, timeline, contact) -->
+      <aside class="aside">
+        <div class="panel reveal skills">
+          <h2 class="section-title">Skills</h2>
+
+          <!-- Estimated bars -->
+          <div class="skill">
+            <div class="label"><span>Python</span><span>92%</span></div>
+            <div class="bar"><i style="width:92%"></i></div>
+          </div>
+
+          <div class="skill">
+            <div class="label"><span>Backend (Node.js, APIs)</span><span>84%</span></div>
+            <div class="bar"><i style="width:84%"></i></div>
+          </div>
+
+          <div class="skill">
+            <div class="label"><span>AI Integration & Agents</span><span>80%</span></div>
+            <div class="bar"><i style="width:80%"></i></div>
+          </div>
+
+          <div class="skill">
+            <div class="label"><span>Databases (Supabase)</span><span>78%</span></div>
+            <div class="bar"><i style="width:78%"></i></div>
+          </div>
+
+          <div class="skill">
+            <div class="label"><span>Frontend (Static UI)</span><span>70%</span></div>
+            <div class="bar"><i style="width:70%"></i></div>
+          </div>
+
+          <div style="margin-top:8px; color:var(--muted); font-size:13px;">Estimates based on the projects and tech you described. These reflect strengths and areas you lead on.</div>
+        </div>
+
+        <div class="panel reveal">
+          <h2 class="section-title">Tech Stack</h2>
+          <div class="techs" style="margin-top:8px">
+            <div class="tech">Python</div>
+            <div class="tech">Node.js</div>
+            <div class="tech">Supabase</div>
+            <div class="tech">Monaco Editor</div>
+            <div class="tech">Electron</div>
+            <div class="tech">Postgres</div>
+            <div class="tech">JS / HTML / CSS</div>
+          </div>
+        </div>
+
+        <div class="panel reveal">
+          <h2 class="section-title">Developer Timeline</h2>
+          <div class="timeline" style="margin-top:8px">
+            <div class="time-item">
+              <div class="time-dot"></div>
+              <div class="time-body"><strong>Project: Zeke</strong><div style="color:var(--muted)">Built custom community features, migrated JSON to Supabase, reached 600+ users.</div></div>
+            </div>
+            <div class="time-item">
+              <div class="time-dot"></div>
+              <div class="time-body"><strong>Project: Coretex</strong><div style="color:var(--muted)">Built dashboard, AI ticket assistant with ephemeral memory, secure Discord auth flows.</div></div>
+            </div>
+            <div class="time-item">
+              <div class="time-dot"></div>
+              <div class="time-body"><strong>Project: Coretex AI Studio</strong><div style="color:var(--muted)">Agent pipelines, Monaco-based IDE, model fallback routing, Electron packaging.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel reveal" id="contact-card">
+          <h2 class="section-title">Contact</h2>
+          <div style="color:var(--muted); margin-top:6px">Email</div>
+          <div style="margin-top:6px; font-weight:700">example@example.com</div>
+          <div style="margin-top:10px; color:var(--muted); font-size:13px">Discord</div>
+          <div style="margin-top:6px; font-weight:700">YourUser#0000</div>
+        </div>
+
+      </aside>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div style="width:min(1100px,94%); text-align:center; padding:24px 0;">
+        © <span id="year"></span> Itamar — Built with focus on reliability & real users
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Utility: reveal on scroll using IntersectionObserver
+    (function(){
+      const reveals = document.querySelectorAll('.reveal');
+      const obs = new IntersectionObserver((entries, o)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add('visible');
+            o.unobserve(e.target);
+          }
+        });
+      }, { root:null, rootMargin:'0px 0px -8% 0px', threshold:0.12 });
+
+      reveals.forEach(r=>obs.observe(r));
+    })();
+
+    // Navbar active link highlight
+    (function(){
+      const links = document.querySelectorAll('.nav-link');
+      const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+      function updateActive(){
+        const scrollPos = window.scrollY + window.innerHeight*0.22;
+        let idx = sections.findIndex(sec => sec && sec.offsetTop + sec.offsetHeight > scrollPos);
+        if(idx === -1) idx = sections.length -1;
+        links.forEach((a,i)=> a.classList.toggle('active', i===idx) );
+      }
+      window.addEventListener('scroll', updateActive);
+      window.addEventListener('resize', updateActive);
+      updateActive();
+    })();
+
+    // Project card micro-tilt on mouse move
+    (function(){
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card=>{
+        card.addEventListener('mousemove', (e)=>{
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `translateY(-6px) rotateX(${(-py*6).toFixed(2)}deg) rotateY(${(px*6).toFixed(2)}deg)`;
+        });
+        card.addEventListener('mouseleave', ()=> card.style.transform = '');
+      });
+    })();
+
+    // Animate skill bars after reveal
+    (function(){
+      const skillBars = document.querySelectorAll('.bar > i');
+      const obs = new IntersectionObserver((entries, o)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            const bar = e.target;
+            // keep width (already set inline) — allow CSS transition to animate it
+            bar.style.width = bar.style.width || bar.getAttribute('data-width') || bar.style.width;
+            o.unobserve(bar);
+          }
+        });
+      }, {threshold:0.25});
+      skillBars.forEach(b=>{
+        // ensure the width remains inline for animation
+        obs.observe(b);
+      });
+    })();
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // set initial widths for bars (they're inline-styled in HTML, but fallback)
+    document.querySelectorAll('.bar > i').forEach((el)=>{
+      if(!el.style.width) el.style.width = el.getAttribute('data-width') || '0%';
+    });
+  </script>
 </body>
 </html>
