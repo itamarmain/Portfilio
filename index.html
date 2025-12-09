@@ -1,0 +1,276 @@
+# index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Itamar | Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Itamar</div>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero reveal">
+    <h1 class="hero-title">I Build AI Systems, Automation & Full Products</h1>
+    <p class="hero-sub">Developer specializing in AI engineering, backend systems, and automated workflows.</p>
+  </header>
+
+  <section class="featured reveal">
+    <h2>Featured Projects</h2>
+    <div class="grid">
+      <a class="card" href="projects.html#zeke">
+        <h3>Zeke Bot</h3>
+        <p>Custom Discord bot with Supabase integration and 600 users.</p>
+      </a>
+
+      <a class="card" href="projects.html#coretex">
+        <h3>Coretex</h3>
+        <p>AI Discord system with dashboard, backend, and full automation.</p>
+      </a>
+
+      <a class="card" href="projects.html#studio">
+        <h3>Coretex AI Studio</h3>
+        <p>Full AI IDE with Monaco editor and multi-model fallback engine.</p>
+      </a>
+    </div>
+  </section>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+# projects.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | Itamar</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Itamar</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-header reveal">
+    <h1>Projects</h1>
+  </section>
+
+  <section class="project-list">
+    <div class="project reveal" id="zeke">
+      <h2>Zeke — Custom Discord Bot</h2>
+      <p>Supabase integration, Python, JSON configuration, 600+ active users.</p>
+    </div>
+
+    <div class="project reveal" id="coretex">
+      <h2>Coretex — AI Discord System</h2>
+      <p>Backend + frontend, full AI integration, ticket assistant and custom APIs.</p>
+    </div>
+
+    <div class="project reveal" id="studio">
+      <h2>Coretex AI Studio</h2>
+      <p>AI Playground, AI IDE, Monaco Editor, agent team system, fallback AI routing, Electron app.</p>
+    </div>
+  </section>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+# about.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Itamar</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Itamar</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-header reveal">
+    <h1>About Me</h1>
+  </section>
+
+  <section class="about-content reveal">
+    <p>I am Itamar, an AI & backend developer who creates automated systems, Discord bots, and full-stack AI platforms.</p>
+    <h3>Skills</h3>
+    <ul>
+      <li>Python</li>
+      <li>JavaScript / Node.js</li>
+      <li>Supabase</li>
+      <li>AI API Integration</li>
+      <li>Full-stack automation</li>
+    </ul>
+  </section>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+# contact.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Itamar</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Itamar</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-header reveal">
+    <h1>Contact</h1>
+  </section>
+
+  <section class="contact reveal">
+    <p>Email me:</p>
+    <a class="mail" href="mailto:example@example.com">example@example.com</a>
+  </section>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+# styles.css
+/* Basic Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  background: #0a0a0f;
+  color: white;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: rgba(20,20,30,0.8);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.navbar ul { display: flex; gap: 20px; list-style: none; }
+.navbar a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.navbar a:hover,
+.navbar a.active { color: #7f5cff; }
+
+.hero {
+  padding: 200px 40px;
+  text-align: center;
+  animation: fadeIn 2s ease;
+}
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.featured { padding: 80px 40px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #14141f;
+  padding: 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 20px #7f5cff55;
+}
+
+.page-header {
+  padding: 120px 40px 40px;
+  text-align: center;
+}
+
+.project-list,
+.about-content,
+.contact {
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+# script.js
+// Scroll reveal animation
+const reveals = document.querySelectorAll('.reveal');
+
+function revealOnScroll() {
+  const trigger = window.innerHeight * 0.85;
+  reveals.forEach(el => {
+    const box = el.getBoundingClientRect().top;
+    if (box < trigger) el.classList.add('visible');
+  });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
