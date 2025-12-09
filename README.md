@@ -80,7 +80,7 @@ I enjoy turning ideas into polished, real products people actually use.
 # 📬 Contact
 
 If you'd like to connect or collaborate:
-**Email:** [example@example.com](mailto:example@example.com)
+**Email:** itamaradoni@gmail.com
 
 ---
 
