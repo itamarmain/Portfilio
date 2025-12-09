@@ -543,9 +543,9 @@
         <div class="panel reveal" id="contact-card">
           <h2 class="section-title">Contact</h2>
           <div style="color:var(--muted); margin-top:6px">Email</div>
-          <div style="margin-top:6px; font-weight:700">example@example.com</div>
+          <div style="margin-top:6px; font-weight:700">adoniitamar@gmail.com</div>
           <div style="margin-top:10px; color:var(--muted); font-size:13px">Discord</div>
-          <div style="margin-top:6px; font-weight:700">YourUser#0000</div>
+          <div style="margin-top:6px; font-weight:700">itamar11_</div>
         </div>
 
       </aside>
@@ -630,6 +630,16 @@
     document.querySelectorAll('.bar > i').forEach((el)=>{
       if(!el.style.width) el.style.width = el.getAttribute('data-width') || '0%';
     });
+    // Smooth scroll for hero buttons and nav links
+document.querySelectorAll('.btn, .nav-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if(target){
+      target.scrollIntoView({behavior:'smooth'});
+    }
+  });
+});
   </script>
 </body>
 </html>
