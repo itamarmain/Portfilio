@@ -240,6 +240,7 @@
     .delay-1 { transition-delay: 100ms; }
     .delay-2 { transition-delay: 200ms; }
     .delay-3 { transition-delay: 300ms; }
+    .delay-4 { transition-delay: 400ms; }
 
     /* Mobile adjustments */
     @media (max-width: 800px) {
@@ -289,6 +290,32 @@
 
       <article class="card reveal" data-spotlight>
         <h3>
+          AI Migration Planner
+          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6M5 10v4a2 2 0 002 2h10a2 2 0 002-2v-4m-7 4h1"></path></svg>
+        </h3>
+        <span class="card-subtitle">FastAPI • Production Safety • Data Integrity</span>
+        
+        <p>
+          A complete, AI-powered system that generates safe, reversible PostgreSQL migration scripts from natural language. This tool showcases deep expertise in **structured LLM output** and **production backend safety**.
+        </p>
+        
+        <div class="tech-stack">
+          <span class="tech">Python (FastAPI)</span>
+          <span class="tech">Groq AI</span>
+          <span class="tech">Pydantic</span>
+          <span class="tech">Supabase (Postgres)</span>
+        </div>
+
+        <div class="highlight-box">
+          <span class="highlight-title">Core Safety Feature: Fallback Agent</span>
+          <p class="highlight-text">
+            Implemented a robust cascading AI fallback system (Groq/Llama) to ensure the service maintains 99% uptime and reliability, even when primary models are unavailable or rate-limited.
+          </p>
+        </div>
+      </article>
+      
+      <article class="card reveal delay-1" data-spotlight>
+        <h3>
           Zeke — Community Bot
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </h3>
@@ -312,7 +339,7 @@
         </div>
       </article>
 
-      <article class="card reveal delay-1" data-spotlight>
+      <article class="card reveal delay-2" data-spotlight>
         <h3>
           Coretex Ecosystem
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -338,7 +365,7 @@
         </div>
       </article>
 
-      <article class="card reveal delay-2" data-spotlight>
+      <article class="card reveal delay-3" data-spotlight>
         <h3>
           Coretex AI Studio
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -363,7 +390,7 @@
         </div>
       </article>
       
-      <div class="card reveal" style="padding:24px; border-color:var(--accent);">
+      <div class="card reveal delay-4" style="padding:24px; border-color:var(--accent);">
         <h3 style="font-size:18px; color:var(--accent);">Production Mindset</h3>
         <p style="margin:0; font-size:14px;">
           I focus on shipping complete systems: robust auth, observability, data integrity, and UX. I prefer practical, secure engineering over brittle hacks.
@@ -396,6 +423,11 @@
 
         <div class="section-head" style="margin-top:40px;">Timeline</div>
         <div class="timeline">
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-title">AI Migration Planner</div>
+            <div class="t-desc">Built FastAPI system for structured, safe migration generation.</div>
+          </div>
           <div class="t-item">
             <div class="t-dot"></div>
             <div class="t-title">Zeke Bot</div>
