@@ -1,531 +1,614 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Itamar — AI & Backend Developer</title>
-  <meta name="description" content="Itamar — AI systems, Discord bots, full-stack automation. Zeke, Coretex, Coretex AI Studio." />
-  <meta name="theme-color" content="#0b0b10" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Itamar — AI & Backend Developer</title>
+  <meta name="description" content="Itamar — AI systems, Discord bots, full-stack automation. Zeke, Coretex, Coretex AI Studio." />
+  <meta name="theme-color" content="#0b0b10" />
 
-  <style>
-    /* --------------------------
-       1. CORE VARIABLES & RESET
-       -------------------------- */
-    :root {
-      --bg: #050507;
-      --card-bg: rgba(23, 25, 35, 0.4);
-      --text-main: #e6f1ff;
-      --text-muted: #8892b0;
-      --accent: #64ffda;       /* High-tech Teal */
-      --accent-glow: rgba(100, 255, 218, 0.15);
-      --secondary: #5b8bff;    /* Deep Blue */
-      --border: rgba(255, 255, 255, 0.08);
-      --radius: 12px;
-      --font-sans: 'Calibre', 'Inter', system-ui, -apple-system, sans-serif;
-      --font-mono: "SF Mono", "Fira Code", "Roboto Mono", monospace;
-    }
+  <style>
+    /* --------------------------
+       1. CORE VARIABLES & RESET
+       -------------------------- */
+    :root {
+      --bg: #050507;
+      --card-bg: rgba(23, 25, 35, 0.4);
+      --text-main: #e6f1ff;
+      --text-muted: #8892b0;
+      --accent: #64ffda;       /* High-tech Teal */
+      --accent-glow: rgba(100, 255, 218, 0.15);
+      --secondary: #5b8bff;    /* Deep Blue */
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 12px;
+      --font-sans: 'Calibre', 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: "SF Mono", "Fira Code", "Roboto Mono", monospace;
+    }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg);
-      color: var(--text-main);
-      font-family: var(--font-sans);
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-    /* Selection Highlight */
-    ::selection { background: rgba(100, 255, 218, 0.2); color: #fff; }
+    /* Selection Highlight */
+    ::selection { background: rgba(100, 255, 218, 0.2); color: #fff; }
 
-    /* --------------------------
-       2. AMBIENT BACKGROUND & NOISE
-       -------------------------- */
-    .noise-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 90; opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
+    /* --------------------------
+       2. AMBIENT BACKGROUND & NOISE
+       -------------------------- */
+    .noise-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 90; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
 
-    .ambient-blob {
-      position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.3; z-index: -1;
-      animation: float 20s infinite alternate;
-    }
-    .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, var(--secondary), transparent); }
-    .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, #2a1f63, transparent); animation-delay: -10s; }
+    .ambient-blob {
+      position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.3; z-index: -1;
+      animation: float 20s infinite alternate;
+    }
+    .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, var(--secondary), transparent); }
+    .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, #2a1f63, transparent); animation-delay: -10s; }
 
-    @keyframes float {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      100% { transform: translate(40px, 40px) rotate(5deg); }
-    }
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(40px, 40px) rotate(5deg); }
+    }
 
-    /* --------------------------
-       3. NAVIGATION
-       -------------------------- */
-    .nav {
-      position: fixed; top: 20px; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: center; pointer-events: none;
-    }
-    .nav-inner {
-      pointer-events: auto;
-      background: rgba(10, 10, 16, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      padding: 10px 24px;
-      border-radius: 50px;
-      display: flex; align-items: center; gap: 32px;
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease, border-color 0.3s;
-    }
-    .nav-inner:hover { border-color: rgba(255,255,255,0.2); }
+    /* --------------------------
+       3. NAVIGATION
+       -------------------------- */
+    .nav {
+      position: fixed; top: 20px; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: center; pointer-events: none;
+    }
+    .nav-inner {
+      pointer-events: auto;
+      background: rgba(10, 10, 16, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      padding: 10px 24px;
+      border-radius: 50px;
+      display: flex; align-items: center; gap: 32px;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, border-color 0.3s;
+    }
+    .nav-inner:hover { border-color: rgba(255,255,255,0.2); }
 
-    .brand {
-      text-decoration: none; color: #fff; font-weight: 700; font-size: 16px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .logo-box {
-      width: 30px; height: 30px; border-radius: 6px;
-      background: linear-gradient(135deg, var(--secondary), var(--accent));
-      color: #000; font-family: var(--font-mono); font-weight: 900; font-size: 14px;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .brand {
+      text-decoration: none; color: #fff; font-weight: 700; font-size: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-box {
+      width: 30px; height: 30px; border-radius: 6px;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: #000; font-family: var(--font-mono); font-weight: 900; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
 
-    .nav-links { display: flex; gap: 24px; }
-    .nav-link {
-      text-decoration: none; color: var(--text-muted); font-size: 13px; font-weight: 500;
-      position: relative; transition: color 0.3s;
-    }
-    .nav-link:hover, .nav-link.active { color: var(--accent); }
-    .nav-link::after {
-      content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0;
-      background: var(--accent); transition: width 0.3s;
-    }
-    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-link {
+      text-decoration: none; color: var(--text-muted); font-size: 13px; font-weight: 500;
+      position: relative; transition: color 0.3s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+    .nav-link::after {
+      content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0;
+      background: var(--accent); transition: width 0.3s;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-    /* --------------------------
-       4. HERO SECTION
-       -------------------------- */
-    .hero {
-      max-width: 1000px; margin: 140px auto 80px; padding: 0 24px;
-    }
-    .intro-mono {
-      font-family: var(--font-mono); color: var(--accent); font-size: 14px;
-      margin-bottom: 20px; display: block;
-    }
-    h1 {
-      margin: 0 0 20px; font-size: clamp(40px, 7vw, 70px); line-height: 1.1; font-weight: 700;
-      background: linear-gradient(90deg, #e6f1ff 30%, #9aaabf);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: -0.02em;
-    }
-    .hero p {
-      max-width: 540px; color: var(--text-muted); font-size: 18px; line-height: 1.6; margin-bottom: 40px;
-    }
+    /* --------------------------
+       4. HERO SECTION
+       -------------------------- */
+    .hero {
+      max-width: 1000px; margin: 140px auto 80px; padding: 0 24px;
+    }
+    .intro-mono {
+      font-family: var(--font-mono); color: var(--accent); font-size: 14px;
+      margin-bottom: 20px; display: block;
+    }
+    h1 {
+      margin: 0 0 20px; font-size: clamp(40px, 7vw, 70px); line-height: 1.1; font-weight: 700;
+      background: linear-gradient(90deg, #e6f1ff 30%, #9aaabf);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      max-width: 540px; color: var(--text-muted); font-size: 18px; line-height: 1.6; margin-bottom: 40px;
+    }
 
-    .btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 16px 32px; border-radius: 4px;
-      color: var(--accent); border: 1px solid var(--accent);
-      text-decoration: none; font-family: var(--font-mono); font-size: 14px;
-      transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 1;
-    }
-    .btn::before {
-      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(100,255,218,0.1), transparent);
-      transition: left 0.6s; z-index: -1;
-    }
-    .btn:hover { background: rgba(100,255,218,0.07); transform: translateY(-3px); }
-    .btn:hover::before { left: 100%; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 32px; border-radius: 4px;
+      color: var(--accent); border: 1px solid var(--accent);
+      text-decoration: none; font-family: var(--font-mono); font-size: 14px;
+      transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 1;
+    }
+    .btn::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(100,255,218,0.1), transparent);
+      transition: left 0.6s; z-index: -1;
+    }
+    .btn:hover { background: rgba(100,255,218,0.07); transform: translateY(-3px); }
+    .btn:hover::before { left: 100%; }
 
-    /* --------------------------
-       5. MAIN GRID
-       -------------------------- */
-    .container {
-      max-width: 1150px; margin: 0 auto; padding: 0 24px;
-      display: grid; grid-template-columns: 2fr 1fr; gap: 50px;
-    }
-    
-    /* Project Cards with Spotlight */
-    .projects-col { display: flex; flex-direction: column; gap: 30px; }
-    
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 32px;
-      border: 1px solid rgba(255,255,255,0.05);
-      position: relative; overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    /* The Spotlight Gradient Overlay */
-    .card::before {
-      content: ""; position: absolute; inset: 0; border-radius: var(--radius); padding: 1px;
-      background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.1), transparent 40%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      opacity: 0; transition: opacity 0.5s; pointer-events: none;
-    }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5); }
-    .card:hover::before { opacity: 1; }
+    /* --------------------------
+       5. MAIN GRID
+       -------------------------- */
+    .container {
+      max-width: 1150px; margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 2fr 1fr; gap: 50px;
+    }
+    
+    /* Project Cards with Spotlight */
+    .projects-col { display: flex; flex-direction: column; gap: 30px; }
+    
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative; overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    /* The Spotlight Gradient Overlay */
+    .card::before {
+      content: ""; position: absolute; inset: 0; border-radius: var(--radius); padding: 1px;
+      background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.1), transparent 40%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0; transition: opacity 0.5s; pointer-events: none;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5); }
+    .card:hover::before { opacity: 1; }
 
-    .card h3 {
-      margin: 0 0 10px; color: #fff; font-size: 24px; display: flex; justify-content: space-between; align-items: center;
-    }
-    .card-icon { width: 20px; height: 20px; color: var(--text-muted); transition: color 0.3s; }
-    .card:hover .card-icon { color: var(--accent); }
-    
-    .card-subtitle { color: var(--accent); font-family: var(--font-mono); font-size: 13px; margin-bottom: 16px; display: block; }
-    .card p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
-    
-    .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; font-family: var(--font-mono); font-size: 12px; }
-    .tech { color: var(--accent); background: rgba(100,255,218,0.08); padding: 5px 10px; border-radius: 12px; }
+    .card h3 {
+      margin: 0 0 10px; color: #fff; font-size: 24px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .card-icon { width: 20px; height: 20px; color: var(--text-muted); transition: color 0.3s; }
+    .card:hover .card-icon { color: var(--accent); }
+    
+    .card-subtitle { color: var(--accent); font-family: var(--font-mono); font-size: 13px; margin-bottom: 16px; display: block; }
+    .card p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
+    
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; font-family: var(--font-mono); font-size: 12px; }
+    .tech { color: var(--accent); background: rgba(100,255,218,0.08); padding: 5px 10px; border-radius: 12px; }
 
-    .highlight-box {
-      margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 2px solid var(--accent);
-    }
-    .highlight-title { font-size: 12px; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; display: block; }
-    .highlight-text { font-size: 14px; color: var(--text-muted); margin: 0; }
+    .highlight-box {
+      margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 2px solid var(--accent);
+    }
+    .highlight-title { font-size: 12px; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; display: block; }
+    .highlight-text { font-size: 14px; color: var(--text-muted); margin: 0; }
 
-    /* --------------------------
-       6. SIDEBAR (SKILLS & TIMELINE)
-       -------------------------- */
-    .sidebar { position: sticky; top: 100px; }
-    .panel {
-      padding: 24px; background: rgba(17, 34, 64, 0.4); border-radius: var(--radius);
-      border: 1px solid var(--border); backdrop-filter: blur(5px);
-    }
+    /* --------------------------
+       6. SIDEBAR (SKILLS & TIMELINE)
+       -------------------------- */
+    .sidebar { position: sticky; top: 100px; }
+    .panel {
+      padding: 24px; background: rgba(17, 34, 64, 0.4); border-radius: var(--radius);
+      border: 1px solid var(--border); backdrop-filter: blur(5px);
+    }
 
-    .section-head {
-      font-size: 14px; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
-      margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
-    }
-    .section-head::after { content: ''; height: 1px; background: var(--border); flex: 1; }
+    .section-head {
+      font-size: 14px; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-head::after { content: ''; height: 1px; background: var(--border); flex: 1; }
 
-    /* Skill Bars */
-    .skill { margin-bottom: 18px; }
-    .skill-meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; font-family: var(--font-mono); }
-    .bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
-    .bar-fill { height: 100%; background: var(--accent); width: 0; border-radius: 3px; transition: width 1.5s cubic-bezier(0.2, 0.9, 0.2, 1); }
+    /* Skill Bars */
+    .skill { margin-bottom: 18px; }
+    .skill-meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; font-family: var(--font-mono); }
+    .bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--accent); width: 0; border-radius: 3px; transition: width 1.5s cubic-bezier(0.2, 0.9, 0.2, 1); }
 
-    /* Timeline */
-    .timeline { margin-top: 10px; }
-    .t-item {
-      position: relative; padding-left: 20px; padding-bottom: 24px; border-left: 2px solid rgba(255,255,255,0.1);
-    }
-    .t-item:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
-    .t-dot {
-      position: absolute; left: -6px; top: 2px; width: 10px; height: 10px;
-      background: var(--bg); border: 2px solid var(--accent); border-radius: 50%;
-    }
-    .t-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .t-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+    /* Timeline */
+    .timeline { margin-top: 10px; }
+    .t-item {
+      position: relative; padding-left: 20px; padding-bottom: 24px; border-left: 2px solid rgba(255,255,255,0.1);
+    }
+    .t-item:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
+    .t-dot {
+      position: absolute; left: -6px; top: 2px; width: 10px; height: 10px;
+      background: var(--bg); border: 2px solid var(--accent); border-radius: 50%;
+    }
+    .t-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .t-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-    /* Contact Mini-Section */
-    .contact-row { margin-top: 8px; font-size: 14px; color: var(--text-muted); }
-    .contact-row b { color: #fff; display: block; margin-bottom: 2px; }
+    /* Contact Mini-Section */
+    .contact-row { margin-top: 8px; font-size: 14px; color: var(--text-muted); }
+    .contact-row b { color: #fff; display: block; margin-bottom: 2px; }
 
-    /* --------------------------
-       7. ANIMATION UTILS
-       -------------------------- */
-    .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    
-    .delay-1 { transition-delay: 100ms; }
-    .delay-2 { transition-delay: 200ms; }
-    .delay-3 { transition-delay: 300ms; }
-    .delay-4 { transition-delay: 400ms; }
-    .delay-5 { transition-delay: 500ms; }
+    /* --------------------------
+       7. ANIMATION UTILS
+       -------------------------- */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    
+    .delay-1 { transition-delay: 100ms; }
+    .delay-2 { transition-delay: 200ms; }
+    .delay-3 { transition-delay: 300ms; }
+    .delay-4 { transition-delay: 400ms; }
+    .delay-5 { transition-delay: 500ms; }
+    .delay-6 { transition-delay: 600ms; }
+    .delay-7 { transition-delay: 700ms; }
 
-    /* Mobile adjustments */
-    @media (max-width: 800px) {
-      .container { grid-template-columns: 1fr; }
-      .sidebar { position: relative; top: 0; margin-top: 40px; }
-      h1 { font-size: 42px; }
-      .nav-inner { padding: 8px 16px; gap: 16px; }
-      .nav-link { display: none; } /* Hide links on small mobile */
-    }
-  </style>
+    /* Mobile adjustments */
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; }
+      .sidebar { position: relative; top: 0; margin-top: 40px; }
+      h1 { font-size: 42px; }
+      .nav-inner { padding: 8px 16px; gap: 16px; }
+      .nav-link { display: none; } /* Hide links on small mobile */
+    }
+  </style>
 </head>
 <body>
 
-  <div class="noise-overlay"></div>
-  <div class="ambient-blob blob-1"></div>
-  <div class="ambient-blob blob-2"></div>
+  <div class="noise-overlay"></div>
+  <div class="ambient-blob blob-1"></div>
+  <div class="ambient-blob blob-2"></div>
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="#home" class="brand">
-        <div class="logo-box">IT</div>
-        <span>Itamar</span>
-      </a>
-      <div class="nav-links">
-        <a href="#projects" class="nav-link">Work</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
-    </div>
-  </nav>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#home" class="brand">
+        <div class="logo-box">IT</div>
+        <span>Itamar</span>
+      </a>
+      <div class="nav-links">
+        <a href="#projects" class="nav-link">Work</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-  <header class="hero" id="home">
-    <span class="intro-mono reveal">Hi, my name is</span>
-    <h1 class="reveal delay-1">Itamar. <br><span style="color:var(--text-muted)">I build intelligent backends.</span></h1>
-    <p class="reveal delay-2">
-      I’m a software engineer specializing in AI-driven systems, Discord automation, and production-grade architecture. I focus on reliability, scale, and clean execution.
-    </p>
-    <div class="reveal delay-3">
-      <a href="#projects" class="btn">Check out my work</a>
-    </div>
-  </header>
+  <header class="hero" id="home">
+    <span class="intro-mono reveal">Hi, my name is</span>
+    <h1 class="reveal delay-1">Itamar. <br><span style="color:var(--text-muted)">I build intelligent backends.</span></h1>
+    <p class="reveal delay-2">
+      I’m a software engineer specializing in AI-driven systems, Discord automation, and production-grade architecture. I focus on reliability, scale, and clean execution.
+    </p>
+    <div class="reveal delay-3">
+      <a href="#projects" class="btn">Check out my work</a>
+    </div>
+  </header>
 
-  <div class="container">
+  <div class="container">
 
-    <div class="projects-col">
-      <h2 class="section-head reveal" id="projects">Selected Work</h2>
+    <div class="projects-col">
+      <h2 class="section-head reveal" id="projects">Selected Work</h2>
 
-      <article class="card reveal" data-spotlight>
-        <h3>
-          Real-Time Code Review Agent
-          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-        </h3>
-        <span class="card-subtitle">Security • Tool-Use • High-Speed API</span>
-        
-        <p>
-          A lightweight, high-speed FastAPI service that integrates a code analysis tool (Radon) with an LLM agent to deliver instant, structured reviews focusing on complexity, security flaws, and performance metrics.
-        </p>
-        
-        <div class="tech-stack">
-          <span class="tech">Python (FastAPI)</span>
-          <span class="tech">Radon/pygount</span>
-          <span class="tech">Pydantic</span>
-          <span class="tech">LLM Tool-Use</span>
-        </div>
+            <article class="card reveal" data-spotlight>
+        <h3>
+          JutsuTrigger - Gesture Hotkeys
+          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        </h3>
+        <span class="card-subtitle">Dynamic Gesture Recognition • OS Automation • Desktop UI</span>
+        
+        <p>
+          A real-time, high-speed computer vision application that recognizes complex, dynamic hand movements ("Kinetic Actions") to execute system commands (e.g., mute, volume, app switching). Demonstrates advanced state machine logic over time-series data.
+        </p>
+        
+        <div class="tech-stack">
+          <span class="tech">Python (Desktop)</span>
+          <span class="tech">MediaPipe Hands</span>
+          <span class="tech">NumPy</span>
+          <span class="tech">OS Integration</span>
+        </div>
 
-        <div class="highlight-box">
-          <span class="highlight-title">Core Feature: Tool Integration</span>
-          <p class="highlight-text">
-            The AI agent is explicitly instructed to call the Radon analysis tool first to inject quantifiable Cyclomatic Complexity and LOC metrics into its final, structured review.
-          </p>
-        </div>
-      </article>
-      <article class="card reveal delay-1" data-spotlight>
-        <h3>
-          AI Migration Planner
-          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6M5 10v4a2 2 0 002 2h10a2 2 0 002-2v-4m-7 4h1"></path></svg>
-        </h3>
-        <span class="card-subtitle">FastAPI • Production Safety • Data Integrity</span>
-        
-        <p>
-          A complete, AI-powered system that generates safe, reversible PostgreSQL migration scripts from natural language. This tool showcases deep expertise in **structured LLM output** and **production backend safety**.
-        </p>
-        
-        <div class="tech-stack">
-          <span class="tech">Python (FastAPI)</span>
-          <span class="tech">Groq AI</span>
-          <span class="tech">Pydantic</span>
-          <span class="tech">Supabase (Postgres)</span>
-        </div>
+        <div class="highlight-box">
+          <span class="highlight-title">Core Feature: Motion Tracking</span>
+          <p class="highlight-text">
+            Logic implemented to differentiate between static poses and dynamic actions like **The Bloom** (rapid finger separation) or **The Swipe** (high-velocity wrist movement) using keypoint velocity metrics.
+          </p>
+        </div>
+      </article>
+      
+      <article class="card reveal delay-1" data-spotlight>
+        <h3>
+          IntruderTrack AI - Surveillance
+          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0v4m-7 3h10a2 2 0 002-2v-2a2 2 0 00-2-2H9a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+        </h3>
+        <span class="card-subtitle">YOLOv8 • Multi-Object Tracking • Attribute Inference</span>
+        
+        <p>
+          A sophisticated surveillance tool using YOLOv8 to locate all humans in a frame (including small objects) and overlay custom tracking metrics like estimated gender and detection of carried objects (weapon proxies) with real-time alerting.
+        </p>
+        
+        <div class="tech-stack">
+          <span class="tech">YOLOv8 (Ultralytics)</span>
+          <span class="tech">OpenCV</span>
+          <span class="tech">Python</span>
+        </div>
 
-        <div class="highlight-box">
-          <span class="highlight-title">Core Safety Feature: Fallback Agent</span>
-          <p class="highlight-text">
-            Implemented a robust cascading AI fallback system (Groq/Llama) to ensure the service maintains 99% uptime and reliability, even when primary models are unavailable or rate-limited.
-          </p>
-        </div>
-      </article>
-      
-      <article class="card reveal delay-2" data-spotlight>
-        <h3>
-          Zeke — Community Bot
-          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-        </h3>
-        <span class="card-subtitle">Moderation • Automation • 600+ Users</span>
-        
-        <p>
-          A purpose-built Discord bot created to improve daily community experience. It provides advanced moderation tools, automation for workflows, and increases user engagement.
-        </p>
-        
-        <div class="tech-stack">
-          <span class="tech">Python</span>
-          <span class="tech">Supabase</span>
-          <span class="tech">AsyncIO</span>
-        </div>
+        <div class="highlight-box">
+          <span class="highlight-title">Core Feature: Dual-Layer Detection</span>
+          <p class="highlight-text">
+            Implemented logic to detect secondary objects (Cell Phones, Backpacks) within the bounding box of a human, allowing for complex "Human + Carried Object" detection scenarios and condition-based alerting.
+          </p>
+        </div>
+      </article>
+      
+      <article class="card reveal delay-2" data-spotlight>
+        <h3>
+          PoseCoach AI - Form Analysis
+          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2h-1v5m-1-5H7m2-4v4"></path></svg>
+        </h3>
+        <span class="card-subtitle">Pose Estimation • Real-Time Coaching • Geometric Analysis</span>
+        
+        <p>
+          A virtual fitness coach that utilizes MediaPipe Pose to track full body keypoints. It calculates joint angles (hips, knees) in real-time to grade form accuracy, count repetitions, and provide actionable voice/text coaching feedback.
+        </p>
+        
+        <div class="tech-stack">
+          <span class="tech">MediaPipe Pose</span>
+          <span class="tech">NumPy (Angle Calcs)</span>
+          <span class="tech">OpenCV</span>
+        </div>
 
-        <div class="highlight-box">
-          <span class="highlight-title">Technical Challenge</span>
-          <p class="highlight-text">
-            Migrated state from local JSON to Supabase Cloud DB while maintaining 99.9% uptime. This required atomic updates and careful schema design to handle the state of 600+ users consistently.
-          </p>
-        </div>
-      </article>
+        <div class="highlight-box">
+          <span class="highlight-title">Core Feature: Angle Deviation Metric</span>
+          <p class="highlight-text">
+            Implemented a function to calculate the precise angle between three 3D keypoints (e.g., Hip-Knee-Ankle) and compare it against an 'Ideal Angle' schema to generate a continuous numerical form score.
+          </p>
+        </div>
+      </article>
 
-      <article class="card reveal delay-3" data-spotlight>
-        <h3>
-          Coretex Ecosystem
-          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-        </h3>
-        <span class="card-subtitle">AI Dashboard • Ticket Assistant • OAuth2</span>
-        
-        <p>
-          A full AI-enabled Discord ecosystem. Includes a web dashboard for configuration and analytics, plus an AI Ticket Assistant trained on FAQs to reduce support load.
-        </p>
-        
-        <div class="tech-stack">
-          <span class="tech">Node.js</span>
-          <span class="tech">React</span>
-          <span class="tech">OpenAI API</span>
-          <span class="tech">Discord OAuth</span>
-        </div>
+            <article class="card reveal delay-3" data-spotlight>
+        <h3>
+          Real-Time Code Review Agent
+          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </h3>
+        <span class="card-subtitle">Security • Tool-Use • High-Speed API</span>
+        
+        <p>
+          A lightweight, high-speed FastAPI service that integrates a code analysis tool (Radon) with an LLM agent to deliver instant, structured reviews focusing on complexity, security flaws, and performance metrics.
+        </p>
+        
+        <div class="tech-stack">
+          <span class="tech">Python (FastAPI)</span>
+          <span class="tech">Radon/pygount</span>
+          <span class="tech">Pydantic</span>
+          <span class="tech">LLM Tool-Use</span>
+        </div>
 
-        <div class="highlight-box">
-          <span class="highlight-title">Key Feature</span>
-          <p class="highlight-text">
-            Implemented "Ephemeral Memory" (10-minute window) for the AI assistant. This ensures user privacy and compliance with Discord TOS while maintaining context during active support conversations.
-          </p>
-        </div>
-      </article>
+        <div class="highlight-box">
+          <span class="highlight-title">Core Feature: Tool Integration</span>
+          <p class="highlight-text">
+            The AI agent is explicitly instructed to call the Radon analysis tool first to inject quantifiable Cyclomatic Complexity and LOC metrics into its final, structured review.
+          </p>
+        </div>
+      </article>
+      <article class="card reveal delay-4" data-spotlight>
+        <h3>
+          AI Migration Planner
+          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6M5 10v4a2 2 0 002 2h10a2 2 0 002-2v-4m-7 4h1"></path></svg>
+        </h3>
+        <span class="card-subtitle">FastAPI • Production Safety • Data Integrity</span>
+        
+        <p>
+          A complete, AI-powered system that generates safe, reversible PostgreSQL migration scripts from natural language. This tool showcases deep expertise in **structured LLM output** and **production backend safety**.
+        </p>
+        
+        <div class="tech-stack">
+          <span class="tech">Python (FastAPI)</span>
+          <span class="tech">Groq AI</span>
+          <span class="tech">Pydantic</span>
+          <span class="tech">Supabase (Postgres)</span>
+        </div>
 
-      <article class="card reveal delay-4" data-spotlight>
-        <h3>
-          Coretex AI Studio
-          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-        </h3>
-        <span class="card-subtitle">Desktop IDE • Agent Pipelines • Electron</span>
-        
-        <p>
-          A developer-focused AI platform for planning and generating code. Features a multi-step "Agent Team" workflow (Planner → Coder → Reviewer) to increase output reliability.
-        </p>
-        
-        <div class="tech-stack">
-          <span class="tech">Electron</span>
-          <span class="tech">Monaco Editor</span>
-          <span class="tech">Agent Logic</span>
-        </div>
+        <div class="highlight-box">
+          <span class="highlight-title">Core Safety Feature: Fallback Agent</span>
+          <p class="highlight-text">
+            Implemented a robust cascading AI fallback system (Groq/Llama) to ensure the service maintains 99% uptime and reliability, even when primary models are unavailable or rate-limited.
+          </p>
+        </div>
+      </article>
+      
+      <article class="card reveal delay-5" data-spotlight>
+        <h3>
+          Zeke — Community Bot
+          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </h3>
+        <span class="card-subtitle">Moderation • Automation • 600+ Users</span>
+        
+        <p>
+          A purpose-built Discord bot created to improve daily community experience. It provides advanced moderation tools, automation for workflows, and increases user engagement.
+        </p>
+        
+        <div class="tech-stack">
+          <span class="tech">Python</span>
+          <span class="tech">Supabase</span>
+          <span class="tech">AsyncIO</span>
+        </div>
 
-        <div class="highlight-box">
-          <span class="highlight-title">Architecture Note</span>
-          <p class="highlight-text">
-            Built a "Model Fallback Router". If the primary high-quality model is unreachable or rate-limited, the system automatically routes to the next best open-source model, ensuring the IDE works offline or under load.
-          </p>
-        </div>
-      </article>
-      
-      <div class="card reveal delay-5" style="padding:24px; border-color:var(--accent);">
-        <h3 style="font-size:18px; color:var(--accent);">Production Mindset</h3>
-        <p style="margin:0; font-size:14px;">
-          I focus on shipping complete systems: robust auth, observability, data integrity, and UX. I prefer practical, secure engineering over brittle hacks.
-        </p>
-      </div>
+        <div class="highlight-box">
+          <span class="highlight-title">Technical Challenge</span>
+          <p class="highlight-text">
+            Migrated state from local JSON to Supabase Cloud DB while maintaining 99.9% uptime. This required atomic updates and careful schema design to handle the state of 600+ users consistently.
+          </p>
+        </div>
+      </article>
 
-    </div>
+      <article class="card reveal delay-6" data-spotlight>
+        <h3>
+          Coretex Ecosystem
+          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </h3>
+        <span class="card-subtitle">AI Dashboard • Ticket Assistant • OAuth2</span>
+        
+        <p>
+          A full AI-enabled Discord ecosystem. Includes a web dashboard for configuration and analytics, plus an AI Ticket Assistant trained on FAQs to reduce support load.
+        </p>
+        
+        <div class="tech-stack">
+          <span class="tech">Node.js</span>
+          <span class="tech">React</span>
+          <span class="tech">OpenAI API</span>
+          <span class="tech">Discord OAuth</span>
+        </div>
 
-    <aside class="sidebar">
-      <div class="panel reveal delay-3" id="skills">
-        
-        <div class="section-head">Technical Inventory</div>
-        
-        <div class="skill">
-          <div class="skill-meta"><span>Python (Async/AI)</span><span>92%</span></div>
-          <div class="bar-bg"><div class="bar-fill" style="width:92%"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-meta"><span>Backend (Node/API)</span><span>84%</span></div>
-          <div class="bar-bg"><div class="bar-fill" style="width:84%"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-meta"><span>Supabase / SQL</span><span>78%</span></div>
-          <div class="bar-bg"><div class="bar-fill" style="width:78%"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-meta"><span>Electron / Frontend</span><span>70%</span></div>
-          <div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div>
-        </div>
+        <div class="highlight-box">
+          <span class="highlight-title">Key Feature</span>
+          <p class="highlight-text">
+            Implemented "Ephemeral Memory" (10-minute window) for the AI assistant. This ensures user privacy and compliance with Discord TOS while maintaining context during active support conversations.
+          </p>
+        </div>
+      </article>
 
-        <div class="section-head" style="margin-top:40px;">Timeline</div>
-        <div class="timeline">
-          <div class="t-item">
-            <div class="t-dot"></div>
-            <div class="t-title">Code Review Agent</div>
-            <div class="t-desc">Built high-speed FastAPI service for security analysis using LLM Tool-Use.</div>
-          </div>
-          <div class="t-item">
-            <div class="t-dot"></div>
-            <div class="t-title">AI Migration Planner</div>
-            <div class="t-desc">Built FastAPI system for structured, safe migration generation.</div>
-          </div>
-          <div class="t-item">
-            <div class="t-dot"></div>
-            <div class="t-title">Zeke Bot</div>
-            <div class="t-desc">Scaled to 600+ users, complex DB migration completed.</div>
-          </div>
-          <div class="t-item">
-            <div class="t-dot"></div>
-            <div class="t-title">Coretex Ecosystem</div>
-            <div class="t-desc">Built Dashboard, AI Ticket assistant, and OAuth security.</div>
-          </div>
-          <div class="t-item">
-            <div class="t-dot"></div>
-            <div class="t-title">Coretex AI Studio</div>
-            <div class="t-desc">Electron Desktop App, Agent Pipelines, Monaco integration.</div>
-          </div>
-        </div>
+      <article class="card reveal delay-7" data-spotlight>
+        <h3>
+          Coretex AI Studio
+          <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </h3>
+        <span class="card-subtitle">Desktop IDE • Agent Pipelines • Electron</span>
+        
+        <p>
+          A developer-focused AI platform for planning and generating code. Features a multi-step "Agent Team" workflow (Planner → Coder → Reviewer) to increase output reliability.
+        </p>
+        
+        <div class="tech-stack">
+          <span class="tech">Electron</span>
+          <span class="tech">Monaco Editor</span>
+          <span class="tech">Agent Logic</span>
+        </div>
 
-        <div class="section-head" style="margin-top:40px;" id="contact">Contact</div>
-        <div class="contact-row">
-          <b>Email</b> adoniitamar@gmail.com
-        </div>
-        <div class="contact-row">
-          <b>Discord</b> itamar11_
-        </div>
+        <div class="highlight-box">
+          <span class="highlight-title">Architecture Note</span>
+          <p class="highlight-text">
+            Built a "Model Fallback Router". If the primary high-quality model is unreachable or rate-limited, the system automatically routes to the next best open-source model, ensuring the IDE works offline or under load.
+          </p>
+        </div>
+      </article>
+      
+      <div class="card reveal delay-7" style="padding:24px; border-color:var(--accent);">
+        <h3 style="font-size:18px; color:var(--accent);">Production Mindset</h3>
+        <p style="margin:0; font-size:14px;">
+          I focus on shipping complete systems: robust auth, observability, data integrity, and UX. I prefer practical, secure engineering over brittle hacks.
+        </p>
+      </div>
 
-      </div>
-    </aside>
+    </div>
 
-  </div>
+    <aside class="sidebar">
+      <div class="panel reveal delay-3" id="skills">
+        
+        <div class="section-head">Technical Inventory</div>
+        
+        <div class="skill">
+          <div class="skill-meta"><span>Python (Async/AI)</span><span>92%</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width:92%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-meta"><span>Backend (Node/API)</span><span>84%</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width:84%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-meta"><span>Supabase / SQL</span><span>78%</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-meta"><span>Electron / Frontend</span><span>70%</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div>
+        </div>
 
-  <footer style="text-align:center; padding:80px 0 40px; color:var(--text-muted); font-size:12px; font-family:var(--font-mono);">
-    <p>© <span id="year"></span> Itamar — Built for performance.</p>
-  </footer>
+        <div class="section-head" style="margin-top:40px;">Timeline</div>
+        <div class="timeline">
+                    <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-title">JutsuTrigger & IntruderTrack</div>
+            <div class="t-desc">Built 3 separate desktop Computer Vision systems for dynamic gesture, pose analysis, and real-time surveillance.</div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-title">Code Review Agent</div>
+            <div class="t-desc">Built high-speed FastAPI service for security analysis using LLM Tool-Use.</div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-title">AI Migration Planner</div>
+            <div class="t-desc">Built FastAPI system for structured, safe migration generation.</div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-title">Zeke Bot</div>
+            <div class="t-desc">Scaled to 600+ users, complex DB migration completed.</div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-title">Coretex Ecosystem</div>
+            <div class="t-desc">Built Dashboard, AI Ticket assistant, and OAuth security.</div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-title">Coretex AI Studio</div>
+            <div class="t-desc">Electron Desktop App, Agent Pipelines, Monaco integration.</div>
+          </div>
+        </div>
 
-  <script>
-    // 1. SET YEAR
-    document.getElementById('year').textContent = new Date().getFullYear();
+        <div class="section-head" style="margin-top:40px;" id="contact">Contact</div>
+        <div class="contact-row">
+          <b>Email</b> adoniitamar@gmail.com
+        </div>
+        <div class="contact-row">
+          <b>Discord</b> itamar11_
+        </div>
 
-    // 2. SCROLL REVEAL (INTERSECTION OBSERVER)
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+      </div>
+    </aside>
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </div>
 
-    // 3. SPOTLIGHT EFFECT (MOUSE TRACKING)
-    const cards = document.querySelectorAll('[data-spotlight]');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-      });
-    });
+  <footer style="text-align:center; padding:80px 0 40px; color:var(--text-muted); font-size:12px; font-family:var(--font-mono);">
+    <p>© <span id="year"></span> Itamar — Built for performance.</p>
+  </footer>
 
-    // 4. SMOOTH SCROLLING FOR ANCHOR LINKS
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
+  <script>
+    // 1. SET YEAR
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 2. SCROLL REVEAL (INTERSECTION OBSERVER)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 3. SPOTLIGHT EFFECT (MOUSE TRACKING)
+    const cards = document.querySelectorAll('[data-spotlight]');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    // 4. SMOOTH SCROLLING FOR ANCHOR LINKS
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
