@@ -120,7 +120,10 @@
     h1 {
       margin: 0 0 20px; font-size: clamp(40px, 7vw, 70px); line-height: 1.1; font-weight: 700;
       background: linear-gradient(90deg, #e6f1ff 30%, #9aaabf);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
       letter-spacing: -0.02em;
     }
     .hero p {
@@ -152,6 +155,34 @@
    
     /* Project Cards with Spotlight */
     .projects-col { display: flex; flex-direction: column; gap: 30px; }
+
+    /* Filter Tabs */
+    .filter-tabs {
+      display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .filter-tab {
+      padding: 10px 20px; border-radius: 6px; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03); color: var(--text-muted);
+      font-family: var(--font-mono); font-size: 13px; cursor: pointer;
+      transition: all 0.3s ease; user-select: none;
+    }
+    .filter-tab:hover {
+      border-color: var(--accent); color: var(--accent);
+      background: rgba(100,255,218,0.05);
+    }
+    .filter-tab.active {
+      border-color: var(--accent); color: var(--accent);
+      background: rgba(100,255,218,0.1);
+      box-shadow: 0 0 20px rgba(100,255,218,0.15);
+    }
+    .filter-count {
+      display: inline-block; margin-left: 6px; padding: 2px 6px;
+      background: rgba(255,255,255,0.1); border-radius: 10px;
+      font-size: 11px; font-weight: 700;
+    }
+    .filter-tab.active .filter-count {
+      background: var(--accent); color: var(--bg);
+    }
    
     .card {
       background: var(--card-bg);
@@ -159,7 +190,10 @@
       padding: 32px;
       border: 1px solid rgba(255,255,255,0.05);
       position: relative; overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, max-height 0.3s ease;
+    }
+    .card.hidden {
+      display: none;
     }
     /* The Spotlight Gradient Overlay */
     .card::before {
@@ -291,7 +325,22 @@
     <div class="projects-col">
       <h2 class="section-head reveal" id="projects">Selected Work</h2>
 
-           <article class="card reveal" data-spotlight>
+      <div class="filter-tabs reveal delay-1">
+        <button class="filter-tab active" data-filter="all">
+          All Projects<span class="filter-count">8</span>
+        </button>
+        <button class="filter-tab" data-filter="cv">
+          Computer Vision<span class="filter-count">3</span>
+        </button>
+        <button class="filter-tab" data-filter="ai-backend">
+          AI & Backend<span class="filter-count">3</span>
+        </button>
+        <button class="filter-tab" data-filter="discord">
+          Discord Ecosystem<span class="filter-count">2</span>
+        </button>
+      </div>
+
+           <article class="card reveal" data-spotlight data-category="cv">
         <h3>
           JutsuTrigger - Gesture Hotkeys
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -317,7 +366,7 @@
         </div>
       </article>
     
-      <article class="card reveal delay-1" data-spotlight>
+      <article class="card reveal delay-1" data-spotlight data-category="cv">
         <h3>
           IntruderTrack AI - Surveillance
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0v4m-7 3h10a2 2 0 002-2v-2a2 2 0 00-2-2H9a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
@@ -342,7 +391,7 @@
         </div>
       </article>
     
-      <article class="card reveal delay-2" data-spotlight>
+      <article class="card reveal delay-2" data-spotlight data-category="cv">
         <h3>
           PoseCoach AI - Form Analysis
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2h-1v5m-1-5H7m2-4v4"></path></svg>
@@ -367,7 +416,7 @@
         </div>
       </article>
 
-           <article class="card reveal delay-3" data-spotlight>
+           <article class="card reveal delay-3" data-spotlight data-category="ai-backend">
         <h3>
           Real-Time Code Review Agent
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -392,7 +441,7 @@
           </p>
         </div>
       </article>
-      <article class="card reveal delay-4" data-spotlight>
+      <article class="card reveal delay-4" data-spotlight data-category="ai-backend">
         <h3>
           AI Migration Planner
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6M5 10v4a2 2 0 002 2h10a2 2 0 002-2v-4m-7 4h1"></path></svg>
@@ -418,7 +467,7 @@
         </div>
       </article>
     
-      <article class="card reveal delay-5" data-spotlight>
+      <article class="card reveal delay-5" data-spotlight data-category="discord">
         <h3>
           Zeke — Community Bot
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -443,7 +492,7 @@
         </div>
       </article>
 
-      <article class="card reveal delay-6" data-spotlight>
+      <article class="card reveal delay-6" data-spotlight data-category="discord">
         <h3>
           Coretex Ecosystem
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -469,7 +518,7 @@
         </div>
       </article>
 
-      <article class="card reveal delay-7" data-spotlight>
+      <article class="card reveal delay-7" data-spotlight data-category="ai-backend">
         <h3>
           Coretex AI Studio
           <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -607,6 +656,40 @@
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if(target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // 5. PROJECT FILTERING
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const projectCards = document.querySelectorAll('.card[data-category]');
+    
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.dataset.filter;
+        
+        // Update active state
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Filter cards with smooth animation
+        projectCards.forEach((card, index) => {
+          const category = card.dataset.category;
+          
+          if (filter === 'all' || category === filter) {
+            card.classList.remove('hidden');
+            // Stagger animation on show
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, index * 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              card.classList.add('hidden');
+            }, 300);
+          }
+        });
       });
     });
   </script>
